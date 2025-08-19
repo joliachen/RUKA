@@ -4,7 +4,6 @@ optimizer:
   weight_decay: 0
 
 learner:
-  cfg: ???
   loss_fn_reduction: sum
   name: lstm_mlp_enc_dec
 
@@ -14,7 +13,7 @@ root_dir: /home/jolia/vr-hand-tracking/Franka-Teach/RUKA/checkpoints
 # Model parameters
 net:
   input_dim: 3
-  output_dim: 3
+  output_dim: 2
   encoder:
     output_dim: 64
     hidden_dim: 128 
@@ -31,15 +30,15 @@ net:
 
 # Dataset parameters
 all_data_directories:
-  - /home/jolia/vr-hand-tracking/Franka-Teach/RUKA/data/right_hand/demonstration_right_thumb
+  - /home/jolia/vr-hand-tracking/Franka-Teach/RUKA/data/right_hand/demonstration_right_four_fingers 
 hand_type: right
 
 dataset: 
   _target_: ruka_hand.learning.dataset.AllHandDataMotor
-  data_dir: /home/jolia/vr-hand-tracking/Franka-Teach/RUKA/data/right_hand/demonstration_right_thumb
-  finger_name: Thumb 
+  data_dir: /home/jolia/vr-hand-tracking/Franka-Teach/RUKA/data/right_hand/demonstration_right_four_fingers
+  finger_name: Middle
   model_type: inverse 
-  input_type: fingertips
+  input_type: joint_angles
   motor_data_type: present
   subsample: False
   obs_horizon: 10

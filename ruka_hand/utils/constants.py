@@ -10,18 +10,18 @@ FINGER_NAMES_TO_MOTOR_IDS = {
 }
 FINGER_NAMES_TO_MANUS_IDS = {"Thumb": 0, "Index": 1, "Middle": 2, "Ring": 3, "Pinky": 4}
 MOTOR_RANGES_LEFT = [724, 600, 563, 1230, 930, 1240, 930, 1000, 1270, 1100, 1100]
-MOTOR_RANGES_RIGHT = [900, 600, 563, 1430, 930, 1340, 1058, 1000, 1270, 1200, 1300]
-USB_PORTS = {"left": "/dev/ttyUSB0", "right": "/dev/ttyUSB0"}
+MOTOR_RANGES_RIGHT = [650, 750, 1213, 1430, 1030, 1440, 1058, 1100, 1320, 1200, 1300]
+USB_PORTS = {"left": "/dev/ttyUSB2", "right": "/dev/ttyUSB0"}
 
 # Controller constants
-HOST = "<input IP address>"
-CHECKPOINT_DIR = "ruka_data/osfstorage/checkpoints"
-
+HOST = "100.82.146.36"
+CHECKPOINT_DIR = "checkpoint_reorganized/2025.08.17"
+# "ruka_data/osfstorage/checkpoints"
 # Manus constants
 RIGHT_STREAM_PORT = 5050
 LEFT_STREAM_PORT = 5051
-LEFT_GLOVE_ID = "<input glove id>"
-RIGHT_GLOVE_ID = "<input glove id>"
+LEFT_GLOVE_ID = "80fe19af"
+RIGHT_GLOVE_ID = "cd25c9c6"
 
 # Oculus constants
 OCULUS_NUM_KEYPOINTS = 24

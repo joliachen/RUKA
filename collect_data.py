@@ -37,7 +37,7 @@ class DataCollector:
         )
 
         collector.save_data_with_random_walk(
-            finger_names=["Thumb"],
+            finger_names=["Thumb"], # "Index", "Middle", "Ring", "Pinky"
             step_size=11,
             sample_num=500,
             walk_len=100,
@@ -82,14 +82,14 @@ if __name__ == "__main__":
         "--demo_num",
         type=str,
         help="Demo number",
-        default="1",
+        default="thumb_v2",
     )
     parser.add_argument(
         "-r",
         "--root_data",
         type=str,
         help="Root data directory",
-        default="/data",
+        default="./data",
     )
     args = parser.parse_args()
 

@@ -30,6 +30,7 @@ class HandCalibrator:
         # should we run three times? maybe more? to make sure it actually does it right
         # use present position
         t = 2
+   
         if motor_id in [4, 5]:
             if motor_id == 4:
                 self.curr_lim = 250
@@ -49,6 +50,7 @@ class HandCalibrator:
         pos = np.array([start_pos] * 11)
         cur = 1000000
         while abs(u_bound - l_bound) > 10 or f * cur > self.curr_lim:
+            print(u_bound, "    ", l_bound, "         ", cur)
             com_pos = (u_bound + l_bound) // 2 - 1
             # if self.testing: print(u_bound, "    ", l_bound, "         ", com_pos)
             pos[motor_id - 1] = com_pos
@@ -91,6 +93,7 @@ class HandCalibrator:
         for i in range(len(curled)):
             curled[i] = self.find_bound(self.motor_ids[i])
         tensioned = [x - f * 1100 for x in curled]
+        print("Curled positions: ", curled)
         return curled, tensioned
 
     def save_motor_limits(self):
@@ -105,7 +108,7 @@ def parse_args():
     parser.add_argument(
         "--hand-type",
         type=str,
-        default="right",
+        default="left",
         choices=["right", "left"],
         help="Type of hand to calibrate (right or left)",
     )

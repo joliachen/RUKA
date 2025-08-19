@@ -1,6 +1,3 @@
-# Will listen to the stream manus data and plot them
-import io
-from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np

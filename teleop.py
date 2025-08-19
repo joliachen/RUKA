@@ -11,7 +11,7 @@ if __name__ == "__main__":
         "--hand_type",
         type=str,
         help="Hand you'd like to teleoperate",
-        default="",
+        default="right",
     )
 
     parser.add_argument(
@@ -19,7 +19,7 @@ if __name__ == "__main__":
         "--mode",
         type=str,
         help="Mode you'd like to teleoperate",
-        default="manus",
+        default="oculus",
     )
 
     args = parser.parse_args()

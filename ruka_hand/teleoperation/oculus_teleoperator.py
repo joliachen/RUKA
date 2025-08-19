@@ -9,7 +9,7 @@ from ruka_hand.utils.constants import *
 from ruka_hand.utils.timer import FrequencyTimer
 from ruka_hand.utils.vectorops import *
 from ruka_hand.utils.zmq import ZMQPublisher, create_pull_socket
-
+from aria2manus.retarget import aria_to_manus_retarget_frame
 
 class OculusTeleoperator:
     def __init__(
@@ -204,19 +204,17 @@ class OculusTeleoperator:
                 self.coord_moving_average_queues[hand_name],
                 self.moving_average_limit,
             )
-
             self.hands[hand_name].step(transformed_hand_coords)
 
     def _run_robots(self):
-        for name in ["left", "right"]:
-
+        for name in [ "right"]:
             raw_keypoints = self.keypoints_sockets[name].recv()
-            keypoint_dict = self._extract_data_from_token(raw_keypoints)
+            keypoint_dict = self._extract_data_from_token(raw_keypoints) 
             _, hand_data = self._get_hand_coords(keypoint_dict["keypoints"])
             transformed_hand_coords, transformed_hand_frame = self.transform_keypoints(
                 hand_data, name
             )
-
+            # print(transformed_hand_coords.shape) # (5,5,3)
             self._operate_hand(name, transformed_hand_coords)
 
     def run(self):
@@ -248,9 +246,11 @@ class OculusTeleoperator:
 
         while True:
             try:
+                print("Streaming hand data...")
                 self.timer.start_loop()
                 for hand_name in self.hand_names:
                     raw_keypoints = self.keypoints_sockets[hand_name].recv()
+                    print(f"Received data for {hand_name} hand.")
                     keypoint_dict = self._extract_data_from_token(raw_keypoints)
                     _, hand_data = self._get_hand_coords(keypoint_dict["keypoints"])
                     transformed_hand_coords, _ = self.transform_keypoints(
@@ -273,10 +273,10 @@ class OculusTeleoperator:
 
 if __name__ == "__main__":
     vr_operator = OculusTeleoperator(
-        HOST,
+        "172.24.71.240",
         OCULUS_LEFT_PORT,
         OCULUS_RIGHT_PORT,
         90,
-        hands=["left", "right"],
+        hands=["right"],
     )
     vr_operator.run()

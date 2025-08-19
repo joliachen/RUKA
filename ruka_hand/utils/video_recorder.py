@@ -34,5 +34,6 @@ class VideoRecorder:
 
     def save(self, file_name):
         path = self.save_dir / file_name
+        print(path)
         kargs = {"macro_block_size": None}
         imageio.mimsave(str(path), self.frames, fps=self.fps, **kargs)

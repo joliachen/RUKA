@@ -59,7 +59,7 @@ class MANUSDataCollector(Recorder):
 
             except:  # Save the data
                 break
-
+                    
         print(f"** MANUS SAVING DONE IN {self._recorder_file_name} **")
         self.record_end_time = time.time()
         self._compress_data(data_dict=self.manus_data)

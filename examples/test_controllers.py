@@ -34,5 +34,5 @@ def run_controller(keypoints: np.ndarray, hand_type: str):
 if __name__ == "__main__":
     hand_type = "right"
 
-    keypoints = load_keypoints("human", hand_type)
+    keypoints = load_keypoints("robot", hand_type)
     run_controller(keypoints, hand_type)

@@ -105,7 +105,7 @@ class Workspace:
 @hydra.main(
     version_base=None,
     config_path="configs",
-    config_name="train_controller",
+    config_name="train_controller_right_thumb",
 )
 def main(cfg: DictConfig) -> None:
     workspace = Workspace(cfg)

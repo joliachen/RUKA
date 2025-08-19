@@ -5,7 +5,7 @@ from ruka_hand.utils.constants import *
 from ruka_hand.utils.timer import FrequencyTimer
 from ruka_hand.utils.vectorops import *
 from ruka_hand.utils.zmq import ZMQSubscriber
-
+from aria2manus import aria_to_manus_retarget_frame
 
 class RUKAOperator:
     def __init__(
@@ -129,7 +129,7 @@ class RUKAOperator:
         if flip_x_axis:  # This is only used in robot_to_robot teleop
             keypoints[:, :, 0] = -keypoints[:, :, 0]
         print(f"keypoints.shape: {keypoints.shape}")
-
+        print("yoyoyyoyoyooy")
         fingertips = calculate_fingertips(keypoints)
         joint_angles = calculate_joint_angles(keypoints)
 
@@ -144,8 +144,15 @@ class RUKAOperator:
         )
 
     def step(self, keypoints):
-        fingertips = calculate_fingertips(keypoints)
-        joint_angles = calculate_joint_angles(keypoints)
+        fingertips = calculate_fingertips(keypoints)  # fingertips (5, 3)
+        joint_angles = calculate_joint_angles(keypoints) # joint_angles(5, 3)
+        
+        # if True: # if retargeting
+        #     retarget_thumb, retarget_joint_angles = aria_to_manus_retarget_frame(keypoints)
+           
+        #     fingertips[0,:] = retarget_thumb # (3,)
+        #     joint_angles[1:5,:] = retarget_joint_angles #(4, 3)
+        
         if np.isnan(joint_angles).any() or np.isnan(fingertips).any():
             print("NAN values inputted skipping")
             return

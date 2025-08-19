@@ -6,7 +6,7 @@ import pickle
 import hydra
 import torch
 from omegaconf import OmegaConf
-
+from pathlib import Path
 
 def get_stats(cfg):
     stats = {}
@@ -30,11 +30,22 @@ def load_config(training_path):
     cfg = OmegaConf.load(os.path.join(training_path, ".hydra/config.yaml"))
     return cfg
 
+def collect_training_paths(date_dir: str | Path):
+    date_dir = Path(date_dir)
+    if not date_dir.is_dir():
+        raise FileNotFoundError(f"{date_dir} not found")
+    runs = []
+    for root, dirs, files in os.walk(date_dir):
+        if 'models' in dirs:          
+            runs.append(Path(root))
+    runs.sort(key=lambda p: p.stat().st_mtime)
+    return runs
 
 if __name__ == "__main__":
-    training_paths = [
-        "<checkpoint-path>",
-    ]
+    BASE = "/home/jolia/vr-hand-tracking/Franka-Teach/RUKA/checkpoints/control-trainings/out"
+    DATE = "2025.08.17"
+    training_paths = collect_training_paths(Path(BASE) / DATE)
+
     for training_path in training_paths:
         cfg = load_config(training_path)
         stats = get_stats(cfg)
