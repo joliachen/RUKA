@@ -8,3 +8,4 @@ __pycache__/
 checkpoints/*
 data/*
 checkpoint_reorganized/*
+*.mp4
