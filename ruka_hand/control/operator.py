@@ -5,7 +5,7 @@ from ruka_hand.utils.constants import *
 from ruka_hand.utils.timer import FrequencyTimer
 from ruka_hand.utils.vectorops import *
 from ruka_hand.utils.zmq import ZMQSubscriber
-from aria2manus import aria_to_manus_retarget_frame
+# from oculus2manus import oculus_to_manus_retarget_frame
 
 class RUKAOperator:
     def __init__(
@@ -148,7 +148,7 @@ class RUKAOperator:
         joint_angles = calculate_joint_angles(keypoints) # joint_angles(5, 3)
         
         # if True: # if retargeting
-        #     retarget_thumb, retarget_joint_angles = aria_to_manus_retarget_frame(keypoints)
+        #     retarget_thumb, retarget_joint_angles = oculus_to_manus_retarget_frame(keypoints)
            
         #     fingertips[0,:] = retarget_thumb # (3,)
         #     joint_angles[1:5,:] = retarget_joint_angles #(4, 3)
